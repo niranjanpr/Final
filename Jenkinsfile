@@ -6,7 +6,7 @@ pipeline {
     	 stage ('Compile Stage') {
 
             steps {
-				git 'https://github.com/niranjanpr/Final.git'
+				//git 'https://github.com/niranjanpr/Final.git'
                 bat '.\\mvnw clean compile'
             }
         }
