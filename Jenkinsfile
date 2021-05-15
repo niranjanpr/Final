@@ -7,7 +7,7 @@ pipeline {
 
             steps {
                 withMaven(maven : 'apache-maven-3.6.1') {
-                    bat 'mvn clean compile'
+                    bat 'mvnw clean compile'
                 }
             }
         }
@@ -15,14 +15,14 @@ pipeline {
 
             steps {
                 withMaven(maven : 'apache-maven-3.6.1') {
-                    bat 'mvn test'
+                    bat 'mvnw test'
                 }
             }
         }
         stage ('Install Stage') {
             steps {
                 withMaven(maven : 'apache-maven-3.6.1') {
-                    bat 'mvn install'
+                    bat 'mvnw install'
                 }
             }
         }   
