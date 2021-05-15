@@ -22,17 +22,17 @@ pipeline {
     	stage ('Build ') {
 
             steps {
-			script
-			 {
-			  if (isUnix()) 
-			   {
-				sh 'mvnw clean compile'
-			   }
-			  else
-			   {
-                bat '.\\mvnw clean compile'
+				script
+				 {
+				  if (isUnix()) 
+				   {
+					sh 'mvnw clean compile'
+				   }
+				  else
+				   {
+					bat '.\\mvnw clean compile'
+					}
 				}
-            }
 			}
         }
 		stage ('Install ') {
@@ -51,7 +51,6 @@ pipeline {
 			}
 		}
         stage ('Testing ') {
-
             steps {
 				script
 				 {
@@ -65,8 +64,6 @@ pipeline {
 					}
 				}
 			}
-        
-         
 			post {
 					always {
 						junit '**/target/surefire-reports/TEST-*.xml'
