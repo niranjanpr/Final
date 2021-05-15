@@ -24,14 +24,10 @@ public class EmployeeController {
 		return service.getAllEmployees();
 	}
 	
-	
 	@GetMapping(value="/{id}")
 	public EmployeeEntity getEmployee(@PathVariable("id") String id)
 	{
 		return service.getEmployee(id);
 	}
-	
-	
-	
 
 }
