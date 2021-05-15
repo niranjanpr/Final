@@ -2,8 +2,24 @@ pipeline {
     agent any
 
     stages {
-    
-    	 stage ('Compile Stage') {
+		stage('Clean')
+		 {
+		  steps
+		   {
+			script
+			 {
+			  if (isUnix()) 
+			   {
+				sh 'mvn --batch-mode clean'
+			   }
+			  else
+			   {
+				bat 'mvn --batch-mode clean'
+			   }
+			 }
+		   }
+		 }
+    	stage ('Build stage') {
 
             steps {
 			script
@@ -70,7 +86,7 @@ pipeline {
 			   }
 			  else
 			   {
-				bat 'mvn --batch-mode checkstyle:checkstyle pmd:pmd pmd:cpd com.github.spotbugs:spotbugs-maven-plugin:spotbugs'
+				bat '.\\mvn --batch-mode checkstyle:checkstyle pmd:pmd pmd:cpd com.github.spotbugs:spotbugs-maven-plugin:spotbugs'
 			   }
 			 }
 		   }
@@ -88,7 +104,7 @@ pipeline {
 			   }
 			  else
 			   {
-				bat '\\mvnw --batch-mode site'
+				bat '.\\mvnw --batch-mode site'
 			   }
 			 }
 		   }
