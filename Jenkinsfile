@@ -19,7 +19,7 @@ pipeline {
 			 }
 		   }
 		 }
-    	stage ('Build stage') {
+    	stage ('Build ') {
 
             steps {
 			script
@@ -35,7 +35,7 @@ pipeline {
             }
 			}
         }
-		stage ('Install Stage') {
+		stage ('Install ') {
             steps {
 				script
 				 {
@@ -50,7 +50,7 @@ pipeline {
 				}
 			}
 		}
-        stage ('Testing Stage') {
+        stage ('Testing ') {
 
             steps {
 				script
