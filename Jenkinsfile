@@ -3,11 +3,7 @@ pipeline {
 
     stages {
     
-		stage('test') {
-               gitlabCommitStatus("test") {
-                   sh "mvn verify -DgitRevision=$revision"
-               }
-           }
+		
     	 stage ('Compile Stage') {
 
             steps {
