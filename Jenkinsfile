@@ -92,30 +92,6 @@ pipeline {
 		   }
 		 }
 		 
-		stage('Documentation')
-		{
-		  steps
-		   {
-			script
-			 {
-			  if (isUnix()) 
-			   {
-				sh 'mvn --batch-mode site'
-			   }
-			  else
-			   {
-				bat '.\\mvnw --batch-mode site'
-			   }
-			 }
-		   }
-		  post
-		   {
-			always
-			 {
-			  publishHTML(target: [reportName: 'Site', reportDir: 'target/site', reportFiles: 'index.html', keepAll: false])
-			 }
-		   }
-		 }
 		 
 		 stage('Integration tests')
 		 {
