@@ -86,7 +86,7 @@ pipeline {
 			   }
 			  else
 			   {
-				bat '.\\mvn --batch-mode checkstyle:checkstyle pmd:pmd pmd:cpd com.github.spotbugs:spotbugs-maven-plugin:spotbugs'
+				bat '.\\mvnw --batch-mode checkstyle:checkstyle pmd:pmd pmd:cpd com.github.spotbugs:spotbugs-maven-plugin:spotbugs'
 			   }
 			 }
 		   }
