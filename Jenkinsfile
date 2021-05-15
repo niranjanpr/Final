@@ -29,5 +29,22 @@ pipeline {
             }
         }
 		}
+		  stage('Integration tests')
+     {
+      steps
+       {
+        script
+         {
+          if (isUnix()) 
+           {
+            sh 'mvn --batch-mode failsafe:integration-test failsafe:verify'
+           }
+          else
+           {
+            bat '.\\mvnw --batch-mode failsafe:integration-test failsafe:verify'
+           }
+         }
+       }
+     }
 	}
 }
