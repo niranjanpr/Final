@@ -7,7 +7,8 @@ pipeline {
 
             steps {
                 withMaven(maven : 'apache-maven-3.6.1') {
-                    bat 'mvnw clean compile'
+                bat '.\\mvnw clean compile'
+				
                 }
             }
         }
