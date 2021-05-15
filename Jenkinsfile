@@ -25,12 +25,11 @@ pipeline {
                     bat 'mvn install'
                 }
             }
-        }
-        
-            post {
+        }   
+        } 
+		post {
                 always {
                     junit '**/target/surefire-reports/TEST-*.xml'
-                }
             }
         }
-    }
+ }
