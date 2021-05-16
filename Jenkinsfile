@@ -66,7 +66,7 @@ pipeline {
       steps{
         script {
 			// def docker = "my docker"
-          dockerImage = docker.build registry +":$BUILD_NUMBER"
+          dockerImage = docker.build registry //+":$BUILD_NUMBER"
         }
       }
     }
@@ -85,7 +85,7 @@ pipeline {
       }
 	  stage('Cleaning up') { 
             steps { 
-                bat "docker rmi $registry:$BUILD_NUMBER" 
+                bat "docker rmi $registry"//:$BUILD_NUMBER" 
             }
         } 
 
