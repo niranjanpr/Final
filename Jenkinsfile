@@ -24,7 +24,7 @@ pipeline {
 				}
 			}
 		}
-		 stage('Integration tests') {
+		stage('Integration tests') {
 		  steps{
 			script{
 			  if (isUnix()) {
@@ -46,32 +46,31 @@ pipeline {
 				}
             }
           }
-	stage('Building image') {
-      steps{
-        script {
-			// def docker = "my docker"
-          dockerImage = docker.build registry +":$BUILD_NUMBER"
-        }
-      }
-    }
-   
-    stage('Pushing to DockerHub') {
-     steps{  
-         script {
-			 if (isUnix()) {
-			}else{
-				 docker.withRegistry( '', registryCredential ) { 
-                        dockerImage.push() 
-				 }
+		stage('Building image') {
+		  steps{
+			script {
+				// def docker = "my docker"
+			  dockerImage = docker.build registry +":$BUILD_NUMBER"
 			}
-         }
-        }
-      }
-	  stage('Cleaning up') { 
-            steps { 
-                bat "docker rmi $registry:$BUILD_NUMBER" 
-            }
-        } 
+		  }
+		}
+	   
+		stage('Pushing to DockerHub') {
+		 steps{  
+			 script {
+				 
+					docker.withRegistry( '', registryCredential ) { 
+					dockerImage.push() 
+					}
+				}
+			}
+		}
+	  
+		stage('Cleaning up') { 
+			steps { 
+				bat "docker rmi $registry:$BUILD_NUMBER" 
+			}
+		} 
 
 	}
 }
