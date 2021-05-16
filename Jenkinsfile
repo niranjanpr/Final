@@ -3,65 +3,41 @@ pipeline {
 
     stages {
 		  
-		stage('Clean')
-		 {
-		  steps
-		   {
-			// git url:'https://github.com/niranjanpr/Final.git'
-			script
-			 {
-			  if (isUnix()) 
-			   {
-				sh 'mvn --batch-mode clean'
-			   }
-			  else
-			   {
-				bat '.\\mvnw --batch-mode clean'
-			   }
-			 }
-		   }
-		 }
-    	stage ('Build ') {
-
-            steps {
-				script
-				 {
-				  if (isUnix()) 
-				   {
-					sh 'mvnw clean compile'
-				   }
-				  else
-				   {
-					bat '.\\mvnw clean compile'
-					}
-				}
-			}
-        }
-		stage ('Install ') {
-            steps {
-				script
-				 {
-				  if (isUnix()) 
-				   {
-					sh 'mvnw install'
-				   }
-				  else
-				   {
-						bat '.\\mvnw install'
-					}
-				}
-			}
-		}
+		// stage('Clean')
+		 // {
+		  // steps{
+			git url:'https://github.com/niranjanpr/Final.git'
+			// script
+			 // {
+			  // if (isUnix()){
+				// sh 'mvn --batch-mode clean'
+			   // }
+			  // else{
+				// bat '.\\mvnw --batch-mode clean'
+			   // }
+			 // }
+		   // }
+		 // }
+    	
+		// stage ('Install ') {
+            // steps {
+				// script{
+				  // if (isUnix()){
+					// sh 'mvnw install'
+				   // }
+				  // else{
+						// bat '.\\mvnw install'
+					// }
+				// }
+			// }
+		// }
         stage ('Testing ') {
             steps {
-				script
-				 {
-				  if (isUnix()) 
-				   {
+				script{
+				  if (isUnix()){
 					sh 'mvnw test'
 				   }
-				  else
-				   {
+				  else{
 						bat '.\\mvnw test'
 					}
 				}
@@ -89,18 +65,13 @@ pipeline {
 			 // }
 		   // }
 		 // }
-		 stage('Integration tests')
-		 {
-		  steps
-		   {
-			script
-			 {
-			  if (isUnix()) 
-			   {
+		 stage('Integration tests') {
+		  steps{
+			script{
+			  if (isUnix()) {
 				sh 'mvn --batch-mode failsafe:integration-test failsafe:verify'
 			   }
-			  else
-			   {
+			  else {
 				bat '.\\mvnw --batch-mode failsafe:integration-test failsafe:verify'
 			   }
 			 }
@@ -112,13 +83,26 @@ pipeline {
 				script{
 				  withSonarQubeEnv('sonarserver') {
 					bat '.\\mvnw clean package sonar:sonar'
-					//'.\\mvnw sonar:sonar'
-					// org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'//'
 				  }
 				}
             }
           }
-		  
+		  stage ('Build ') {
+
+            steps {
+				script
+				 {
+				  if (isUnix()) 
+				   {
+					sh 'mvnw clean compile'
+				   }
+				  else
+				   {
+					bat '.\\mvnw clean compile'
+					}
+				}
+			}
+        }
 		  // stage("Quality Gate"){
           // timeout(time: 1, unit: 'HOURS') {
               // def qg = waitForQualityGate()
