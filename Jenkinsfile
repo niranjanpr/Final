@@ -6,7 +6,7 @@ pipeline {
 		 {
 		  steps
 		   {
-			git url:'https://github.com/niranjanpr/Final.git'
+			//git url:'https://github.com/niranjanpr/Final.git'
 			script
 			 {
 			  if (isUnix()) 
