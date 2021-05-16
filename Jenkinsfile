@@ -7,8 +7,9 @@ pipeline {
             steps {
 				script{
 				  withSonarQubeEnv('sonarserver') {
-					bat "mvnw sonar:sonar"
-					//org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'//'.\\mvn clean package sonar:sonar'
+					bat '.\\mvnw clean package sonar:sonar'
+					//'.\\mvnw sonar:sonar'
+					// org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'//'
 				  }
 				}
             }
