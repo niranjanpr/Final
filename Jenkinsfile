@@ -46,23 +46,7 @@ pipeline {
 				}
             }
           }
-		  stage ('Build ') {
-
-            steps {
-				script
-				 {
-				  if (isUnix()) 
-				   {
-					sh 'mvnw clean compile'
-				   }
-				  else
-				   {
-					bat '.\\mvnw clean compile'
-					}
-				}
-			}
-        }
-			stage('Building image') {
+	stage('Building image') {
       steps{
         script {
 			// def docker = "my docker"
