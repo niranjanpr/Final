@@ -5,7 +5,9 @@ pipeline {
 		
 		stage("build & SonarQube analysis") {
             steps {
-                bat '.\\mvn clean package sonar:sonar'
+              withSonarQubeEnv('sonarqube') {
+                bat '.\\mvnw clean package sonar:sonar'
+              }
             }
           }
           stage("Quality Gate") {
