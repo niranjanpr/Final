@@ -6,7 +6,7 @@ pipeline {
 		stage("build & SonarQube analysis") {
             steps {
               withSonarQubeEnv('SonarQube') {
-                bat '.\\mvn clean package sonar:sonar'
+                bat 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'//'.\\mvn clean package sonar:sonar'
               }
             }
           }
