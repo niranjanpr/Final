@@ -22,7 +22,7 @@ pipeline {
 		 // {
 		  // steps
 		   // {
-			git url:'https://github.com/niranjanpr/Final.git'
+			// git url:'https://github.com/niranjanpr/Final.git'
 			// script
 			 // {
 			  // if (isUnix()) 
@@ -129,10 +129,10 @@ pipeline {
             // }
         // }
         // stage("Quality gate") {
-            // steps {
-                // waitForQualityGate abortPipeline: true
-            // }
-        // }
+            steps {
+                waitForQualityGate abortPipeline: true
+            }
+        }
 
 	}
 }
