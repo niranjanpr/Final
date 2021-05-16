@@ -5,11 +5,12 @@ pipeline {
 		
 		stage("build & SonarQube analysis") {
             steps {
-				
+				script{
 				  withSonarQubeEnv('SonarQube') {
-					bat '.\\mvnw sonar:sonar'
+					sh "mvnw sonar:sonar"
 					//org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'//'.\\mvn clean package sonar:sonar'
 				  }
+				}
             }
           }
           stage("Quality Gate") {
