@@ -2,6 +2,13 @@ pipeline {
     agent any
 
     stages {
+		stage('SonarQube analysis') {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    bat ".\\gradlew sonarqube"
+                }
+            }
+        }
 		stage('Clean')
 		 {
 		  steps
@@ -111,7 +118,7 @@ pipeline {
 		 stage('SonarQube analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    sh "./gradlew sonarqube"
+                    bat ".\\gradlew sonarqube"
                 }
             }
         }
