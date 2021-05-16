@@ -56,7 +56,7 @@ pipeline {
       }
     }
    
-    stage('Pushing to ECR') {
+    stage('Pushing to DockerHub') {
      steps{  
          script {
 			 if (isUnix()) {
