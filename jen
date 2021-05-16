@@ -64,7 +64,7 @@ pipeline {
 	stage('Building image') {
       steps{
         script {
-			def docker = "my docker"
+			// def docker = "my docker"
           dockerImage = docker.build registry
         }
       }
@@ -74,8 +74,8 @@ pipeline {
     stage('Pushing to ECR') {
      steps{  
          script {
-                sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 326213389784.dkr.ecr.us-east-1.amazonaws.com'
-                sh 'docker push 326213389784.dkr.ecr.us-east-1.amazonaws.com/docker:latest'
+                bat 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 326213389784.dkr.ecr.us-east-1.amazonaws.com'
+                bat 'docker push 326213389784.dkr.ecr.us-east-1.amazonaws.com/docker:latest'
          }
         }
       }
