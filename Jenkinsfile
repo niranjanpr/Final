@@ -2,13 +2,23 @@ pipeline {
     agent any
 
     stages {
-		stage('SonarQube analysis') {
+		
+		stage("build & SonarQube analysis") {
+            agent any
             steps {
-                withSonarQubeEnv('SonarQube') {
-                    bat ".\\gradlew sonarqube"
-                }
+              withSonarQubeEnv('My SonarQube Server') {
+                bat 'mvn clean package sonar:sonar'
+              }
             }
-        }
+          }
+          stage("Quality Gate") {
+            steps {
+              timeout(time: 1, unit: 'HOURS') {
+                waitForQualityGate abortPipeline: true
+              }
+            }
+          }
+		  
 		stage('Clean')
 		 {
 		  steps
