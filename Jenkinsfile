@@ -7,34 +7,6 @@ pipeline {
     }
     stages {
 		  
-		// stage('Clean')
-		 // {
-		  // steps{
-			// git url:'https://github.com/niranjanpr/Final.git'
-			// script
-			 // {
-			  // if (isUnix()){
-				// sh 'mvn --batch-mode clean'
-			   // }
-			  // else{
-				// bat '.\\mvnw --batch-mode clean'
-			   // }
-			 // }
-		   // }
-		 // }
-    	
-		// stage ('Install ') {
-            // steps {
-				// script{
-				  // if (isUnix()){
-					// sh 'mvnw install'
-				   // }
-				  // else{
-						// bat '.\\mvnw install'
-					// }
-				// }
-			// }
-		// }
         stage ('Testing ') {
             steps {
 				script{
@@ -52,23 +24,6 @@ pipeline {
 				}
 			}
 		}
-		// stage('Sanity check')
-		 // {
-		  // steps
-		   // {
-			// script
-			 // {
-			  // if (isUnix()) 
-			   // {
-				// sh 'mvn --batch-mode checkstyle:checkstyle pmd:pmd pmd:cpd com.github.spotbugs:spotbugs-maven-plugin:spotbugs'
-			   // }
-			  // else
-			   // {
-				// bat '.\\mvnw --batch-mode checkstyle:checkstyle pmd:pmd pmd:cpd com.github.spotbugs:spotbugs-maven-plugin:spotbugs'
-			   // }
-			 // }
-		   // }
-		 // }
 		 stage('Integration tests') {
 		  steps{
 			script{
@@ -116,7 +71,7 @@ pipeline {
       }
     }
    
-    stage('Pushing to ECR') {
+    stage('Pushing to DockerHub') {
      steps{  
          script {
 			 if (isUnix()) {
@@ -133,26 +88,6 @@ pipeline {
                 bat "docker rmi $registry:$BUILD_NUMBER" 
             }
         } 
-		  // stage("Quality Gate"){
-          // timeout(time: 1, unit: 'HOURS') {
-              // def qg = waitForQualityGate()
-              // if (qg.status != 'OK') {
-                  // error "Pipeline aborted due to quality gate failure: ${qg.status}"
-              // }
-          // }
-      // }
-		 // stage('SonarQubes analysis') {
-            // steps {
-                // withSonarQubeEnv('sonarserver') {
-                    // bat ".\\gradlew sonarqube"
-                // }
-            // }
-        // }
-        // stage("Quality gate") {
-            // steps {
-                // waitForQualityGate abortPipeline: true
-            // }
-        // }
 
 	}
 }
