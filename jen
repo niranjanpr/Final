@@ -7,6 +7,16 @@ pipeline {
     }
    
     stages {
+		stage('Deploy to AWS') {
+            // environment {
+            //     DOCKER_HUB_LOGIN = credentials('docker-hub')
+            // }
+            steps {
+                withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
+                def outputs = cfnUpdate(stack:'my-stack', url:'https://raw.githubusercontent.com/niranjanpr/Final/main/ecs.yml')
+				}
+            }
+        }
     //     stage ('Testing ') {
     //         steps {
 	// 			script{
