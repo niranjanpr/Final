@@ -13,6 +13,7 @@ pipeline {
             // }
             steps {
                 withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
+					bat "aws sts get-caller-identity"
                 def outputs = cfnUpdate(stack:'my-stack', url:'https://github.com/niranjanpr/Final.git/jen')
 				}
             }
