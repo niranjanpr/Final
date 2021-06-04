@@ -13,7 +13,7 @@ pipeline {
             // }
             steps {
                 withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
-                def outputs = cfnUpdate(stack:'my-stack', file:'jen')
+                def outputs = cfnUpdate(stack:'my-stack', url:'https://github.com/niranjanpr/Final.git/jen')
 				}
             }
         }
