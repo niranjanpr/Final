@@ -4,6 +4,7 @@ pipeline {
         registry = "niranjanpr/employee-service" 
         registryCredential = 'dockerhub_id' 
         dockerImage = '' 
+		env.PATH = env.PATH + ";c:\\Windows\\System32"
     }
    
     stages {
