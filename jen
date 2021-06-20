@@ -13,7 +13,7 @@ pipeline {
             // }
             steps {
                 withAWS(credentials: 'aws-credentials', region: env.AWS_REGION) {
-					aws --version
+					// aws --version
                 // def outputs = cfnUpdate(stack:'my-stack', url:'https://helloworld1234-89.s3.amazonaws.com/ecs.yml')
 				def response = cfnValidate(file:'ecs.yml')
 				echo "template description: ${response.description}"
