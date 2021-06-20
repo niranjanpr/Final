@@ -4,7 +4,7 @@ pipeline {
         registry = "niranjanpr/employee-service" 
         registryCredential = 'dockerhub_id' 
         dockerImage = '' 
-		sid='SUBNET_ID'
+		SubnetID='SUBNET_ID'
 		
     }
    
@@ -21,7 +21,7 @@ pipeline {
 				// s3FindFiles(bucket:'mybucketforcloudformation1238906745')
 				// def response = cfnValidate(file:'ecs.yml')
 				// echo "template description: ${response.description}"	
-				def outputs = cfnUpdate(stack:'my-stack', file:'ecs.yml', params:['SubnetID=subnet-03cacc76f58bd370a'], timeoutInMinutes:10, tags:['TagName=Value'],  pollInterval:1000)
+				def outputs = cfnUpdate(stack:'my-stack', file:'ecs.yml', params:['SubnetID'], timeoutInMinutes:10, tags:['TagName=Value'],  pollInterval:1000)
 	
                 // def outputs = cfnUpdate(stack:'my-stack', url:'https://helloworld1234-89.s3.amazonaws.com/ecs.yml')
 				//  bat 's3Upload(file:'ecs.yml', bucket:'mybucketforcloudformation1238906745', path:'path/ecs.yml')'
