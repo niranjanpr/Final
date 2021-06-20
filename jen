@@ -12,11 +12,13 @@ pipeline {
             //     DOCKER_HUB_LOGIN = credentials('docker-hub')
             // }
             steps {
+				script {
                 withAWS(credentials: 'aws-credentials', region: env.AWS_REGION) {
 				bat 'aws --version'
                 // def outputs = cfnUpdate(stack:'my-stack', url:'https://helloworld1234-89.s3.amazonaws.com/ecs.yml')
 				 bat 'cfnValidate(file:'ecs.yml')'
 				//  bat ' echo "template description: ${response.description}"'
+				}
 				}
             }
         }
