@@ -1,7 +1,7 @@
 AWSTemplateFormatVersion: 2010-09-09
 Parameters:
   SubnetID: 
-    Type: 'AWS::EC2::Subnet::Id'
+    Type: String
 Resources:
   Cluster:
     Type: 'AWS::ECS::Cluster'
