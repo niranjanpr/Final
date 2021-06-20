@@ -17,7 +17,7 @@ pipeline {
                 withAWS(credentials: 'aws-credentials', region: env.AWS_REGION) {
 				bat 'aws --version'
 				bat 'aws s3 ls'
-				bat 's3FindFiles(bucket:'mybucketforcloudformation1238906745')'
+				s3FindFiles(bucket:'mybucketforcloudformation1238906745')
 
                 // def outputs = cfnUpdate(stack:'my-stack', url:'https://helloworld1234-89.s3.amazonaws.com/ecs.yml')
 				//  bat 's3Upload(file:'ecs.yml', bucket:'mybucketforcloudformation1238906745', path:'path/ecs.yml')'
