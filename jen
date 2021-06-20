@@ -4,7 +4,7 @@ pipeline {
         registry = "niranjanpr/employee-service" 
         registryCredential = 'dockerhub_id' 
         dockerImage = '' 
-		SubnetID='env.SUBNET_ID'
+		SubnetID='SUBNET_ID'
 		
     }
    
