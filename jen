@@ -23,7 +23,7 @@ pipeline {
 				// echo "template description: ${response.description}"	
 				echo "hello ${SubnetID123}"
 				echo "${env.SUBNET_ID}"
-				def outputs = cfnUpdate(stack:'my-stack', file:'ecs.yml', params:['SubnetID='"${env.SUBNET_ID}"], timeoutInMinutes:10, tags:['TagName=Value'],  pollInterval:1000)
+				def outputs = cfnUpdate(stack:'my-stack', file:'ecs.yml', params:['SubnetID=SubnetID123'], timeoutInMinutes:10, tags:['TagName=Value'],  pollInterval:1000)
 	
                 // def outputs = cfnUpdate(stack:'my-stack', url:'https://helloworld1234-89.s3.amazonaws.com/ecs.yml')
 				//  bat 's3Upload(file:'ecs.yml', bucket:'mybucketforcloudformation1238906745', path:'path/ecs.yml')'
