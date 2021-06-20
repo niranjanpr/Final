@@ -4,6 +4,7 @@ pipeline {
         registry = "niranjanpr/employee-service" 
         registryCredential = 'dockerhub_id' 
         dockerImage = '' 
+		SubnetID123="${env.SUBNET_ID}"
     }
     stages {
 		  
