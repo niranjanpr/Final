@@ -21,8 +21,8 @@ pipeline {
 				// s3FindFiles(bucket:'mybucketforcloudformation1238906745')
 				// def response = cfnValidate(file:'ecs.yml')
 				// echo "template description: ${response.description}"	
-				echo "$SubnetID"
-				echo 'env.SUBNET_ID' 
+				echo "${SubnetID}"
+				echo '${env.SUBNET_ID}' 
 				// def outputs = cfnUpdate(stack:'my-stack', file:'ecs.yml', params:['SubnetID=SubnetID'], timeoutInMinutes:10, tags:['TagName=Value'],  pollInterval:1000)
 	
                 // def outputs = cfnUpdate(stack:'my-stack', url:'https://helloworld1234-89.s3.amazonaws.com/ecs.yml')
