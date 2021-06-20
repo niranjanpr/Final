@@ -17,7 +17,7 @@ pipeline {
                 withAWS(credentials: 'aws-credentials', region: env.AWS_REGION) {
 				bat 'aws --version'
 				bat 'aws s3 ls'
-				s3FindFiles(bucket:'mybucketforcloudformation1238906745')
+				// s3FindFiles(bucket:'mybucketforcloudformation1238906745')
 				def response = cfnValidate(file:'ecs.yml')
 				echo "template description: ${response.description}"	
 				def outputs = cfnUpdate(stack:'my-stack', file:'ecs.yml', params:['SubnetID=env.SUBNET_ID'], timeoutInMinutes:10, tags:['TagName=Value'],  pollInterval:1000)
