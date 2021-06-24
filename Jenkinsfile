@@ -78,7 +78,7 @@ pipeline {
                 withAWS(credentials: 'aws-credentials', region: env.AWS_REGION) {
 				// bat 'aws --version'
 				// bat 'aws s3 ls'
-				echo "hello ${SubnetID123} " + "${env.SUBNET_ID}"
+				echo "hello ${SubnetID123} , ${env.SUBNET_ID}"
 				def response = cfnValidate(file:'ecs.yml')
 				echo "template description: ${response.description}"
 				}
