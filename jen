@@ -6,8 +6,9 @@ pipeline {
         dockerImage = '' 
 		SubnetID123="${env.SUBNET_ID}"
     }
+   
     stages {
-		  
+		
         stage ('Testing ') {
             steps {
 				script{
@@ -25,7 +26,7 @@ pipeline {
 				}
 			}
 		}
-		stage('Integration tests') {
+		 stage('Integration tests') {
 		  steps{
 			script{
 			  if (isUnix()) {
@@ -38,7 +39,7 @@ pipeline {
 		   }
 		 }
 		 
-		stage("build & SonarQube analysis") {
+		 stage("build & SonarQube analysis") {
             steps {
 				script{
 				  withSonarQubeEnv('sonarserver') {
@@ -46,38 +47,42 @@ pipeline {
 				  }
 				}
             }
+          }
+		  
+	stage('Building image') {
+      steps{
+        script {
+			// def docker = "my docker"
+          dockerImage = docker.build registry //+":$BUILD_NUMBER"
         }
-		stage('Building image') {
-		  steps{
-			script {
-				// def docker = "my docker"
-			  dockerImage = docker.build registry //+":$BUILD_NUMBER"
+      }
+    }
+   
+    stage('Pushing to DockerHub') {
+     steps{  
+         script {
+			 if (isUnix()) {
+			}else{
+				 docker.withRegistry( '', registryCredential ) { 
+                        dockerImage.push() 
+				 }
 			}
-		  }
-		}
-	   
-		stage('Pushing to DockerHub') {
-		 steps{  
-			 script {
-					docker.withRegistry( '', registryCredential ) { 
-					dockerImage.push() 
-					}
-				}
-			}
-		}
-	  
-		stage('Cleaning up') { 
-			steps { 
-				bat "docker rmi $registry"//:$BUILD_NUMBER" 
-			}
-		}
-		stage('validating Cloudformation template') {
+         }
+        }
+      }
+	  stage('Cleaning up') { 
+            steps { 
+                bat "docker rmi $registry:$BUILD_NUMBER" 
+            }
+        }
+	 stage('validating Cloudformation template') {
             steps {
-			  script {
+				script {
                 withAWS(credentials: 'aws-credentials', region: env.AWS_REGION) {
 				// bat 'aws --version'
 				// bat 'aws s3 ls'
-				echo "hello ${SubnetID123} , ${env.SUBNET_ID}"
+				echo "hello ${SubnetID123}"
+				echo "${env.SUBNET_ID}"
 				def response = cfnValidate(file:'ecs.yml')
 				echo "template description: ${response.description}"
 				}
@@ -86,13 +91,13 @@ pipeline {
         } 
 		 stage('Deploy to AWS') {
             steps {
-			  script {
-                withAWS(credentials: 'aws-credentials', region: env.AWS_REGION) {
+				script {
+                // withAWS(credentials: 'aws-credentials', region: env.AWS_REGION) {
+				
 				def outputs = cfnUpdate(stack:'my-stack', file:'ecs.yml', params:["SubnetID=${env.SUBNET_ID}"], timeoutInMinutes:10, tags:['TagName=Value'],  pollInterval:3000)
-				}
+				// }
 			  }
             }
-        } 
-
+        }
 	}
 }
