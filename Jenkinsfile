@@ -38,7 +38,7 @@ pipeline {
 		   }
 		 }
 		 
-		 stage("build & SonarQube analysis") {
+		stage("build & SonarQube analysis") {
             steps {
 				script{
 				  withSonarQubeEnv('sonarserver') {
@@ -46,7 +46,7 @@ pipeline {
 				  }
 				}
             }
-          }
+        }
 		stage('Building image') {
 		  steps{
 			script {
@@ -74,12 +74,11 @@ pipeline {
 		}
 		stage('validating Cloudformation template') {
             steps {
-				script {
+			  script {
                 withAWS(credentials: 'aws-credentials', region: env.AWS_REGION) {
 				// bat 'aws --version'
 				// bat 'aws s3 ls'
-				echo "hello ${SubnetID123}"
-				echo "${env.SUBNET_ID}"
+				echo "hello ${SubnetID123} , ${env.SUBNET_ID}"
 				def response = cfnValidate(file:'ecs.yml')
 				echo "template description: ${response.description}"
 				}
@@ -88,10 +87,9 @@ pipeline {
         } 
 		 stage('Deploy to AWS') {
             steps {
-				script {
+			  script {
                 withAWS(credentials: 'aws-credentials', region: env.AWS_REGION) {
-				
-				def outputs = cfnUpdate(stack:'my-stack', file:'ecs.yml', params:["SubnetID=${env.SUBNET_ID}"], timeoutInMinutes:10, tags:['TagName=Value'],  pollInterval:1000)
+				def outputs = cfnUpdate(stack:'my-stack', file:'ecs.yml', params:["SubnetID=${env.SUBNET_ID}"], timeoutInMinutes:10, tags:['TagName=Value'],  pollInterval:3000)
 				}
 			  }
             }
