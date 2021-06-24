@@ -92,10 +92,10 @@ pipeline {
 		 stage('Deploy to AWS') {
             steps {
 				script {
-                // withAWS(credentials: 'aws-credentials', region: env.AWS_REGION) {
+                withAWS(credentials: 'aws-credentials', region: env.AWS_REGION) {
 				
 				def outputs = cfnUpdate(stack:'my-stack', file:'ecs.yml', params:["SubnetID=${env.SUBNET_ID}"], timeoutInMinutes:10, tags:['TagName=Value'],  pollInterval:3000)
-				// }
+				}
 			  }
             }
         }
